@@ -1,0 +1,5 @@
+1. Všichni uživatelé se svým stavem konta seřazení sestupně
+2. Seřadit týmy podle počtu odehraných zápasů.
+3. Počet týmů v jednotlivých kategoriích podle ratingu
+4. 10 odehraných zápasů, které mají nejvíce uživatelských sázek
+5. Uživatelské sázky, seřazené podle velikost výhry3. Počet týmů v jednotlivých kategoriích podle ratingu

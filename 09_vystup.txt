@@ -1,0 +1,96 @@
+
+Error starting at line : 4 in command -
+UPDATE "UserAccount" SET AMOUNT = -500 WHERE ID = 1
+Error report -
+ORA-02290: kontrolní omezení (C##INVI.USER_ACCOUNT_CHECK_AMOUNT) porušeno
+
+
+Error starting at line : 7 in command -
+INSERT INTO "UserBet" (BET_AMOUNT, CREATED_AT, BET_ID, USER_ID) VALUES (-200, TO_DATE('8/11/2020', 'MM/DD/YYYY'), 1, 1)
+Error report -
+ORA-02290: kontrolní omezení (C##INVI.USER_BET_CHECK_AMOUNT) porušeno
+
+
+Error starting at line : 8 in command -
+INSERT INTO "UserBet" (BET_AMOUNT, CREATED_AT, BET_ID, USER_ID) VALUES (0, TO_DATE('8/11/2020', 'MM/DD/YYYY'), 1, 1)
+Error report -
+ORA-02290: kontrolní omezení (C##INVI.USER_BET_CHECK_AMOUNT) porušeno
+
+
+Error starting at line : 11 in command -
+INSERT INTO "Bet" (START_DATE, END_DATE, DESCRIPTION, RATE, MATCH_ID) VALUES (TO_DATE('5/18/2021', 'MM/DD/YYYY'), TO_DATE('5/17/2021', 'MM/DD/YYYY'), 'Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.', 27.8, 1)
+Error report -
+ORA-20101: Bet must end 1 day before match play date
+ORA-06512: na "C##INVI.IS_BET_ENDING_DAY_BEFORE_MATCH", line 6
+ORA-06512: na "C##INVI.TRG_BET_ENDS_BEFORE_MATCH_PLAY_DATE", line 2
+ORA-04088: chyba během provádění triggeru 'C##INVI.TRG_BET_ENDS_BEFORE_MATCH_PLAY_DATE'
+
+
+Error starting at line : 14 in command -
+INSERT INTO "Bet" (START_DATE, END_DATE, DESCRIPTION, RATE, MATCH_ID) VALUES (TO_DATE('5/18/2021', 'MM/DD/YYYY'), TO_DATE('5/17/2021', 'MM/DD/YYYY'), 'Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.', 1, 1)
+Error report -
+ORA-20101: Bet must end 1 day before match play date
+ORA-06512: na "C##INVI.IS_BET_ENDING_DAY_BEFORE_MATCH", line 6
+ORA-06512: na "C##INVI.TRG_BET_ENDS_BEFORE_MATCH_PLAY_DATE", line 2
+ORA-04088: chyba během provádění triggeru 'C##INVI.TRG_BET_ENDS_BEFORE_MATCH_PLAY_DATE'
+
+
+Error starting at line : 15 in command -
+INSERT INTO "Bet" (START_DATE, END_DATE, DESCRIPTION, RATE, MATCH_ID) VALUES (TO_DATE('5/18/2021', 'MM/DD/YYYY'), TO_DATE('5/17/2021', 'MM/DD/YYYY'), 'Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.', -2, 1)
+Error report -
+ORA-20101: Bet must end 1 day before match play date
+ORA-06512: na "C##INVI.IS_BET_ENDING_DAY_BEFORE_MATCH", line 6
+ORA-06512: na "C##INVI.TRG_BET_ENDS_BEFORE_MATCH_PLAY_DATE", line 2
+ORA-04088: chyba během provádění triggeru 'C##INVI.TRG_BET_ENDS_BEFORE_MATCH_PLAY_DATE'
+
+
+Error starting at line : 18 in command -
+INSERT INTO "Match" (TEAM1, TEAM2, PLAYED_AT, DESCRIPTION, RESULT) VALUES (4, 4, TO_DATE('3/12/2021', 'mm/dd/yyyy'), 'Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus.', 'WIN')
+Error report -
+ORA-02290: kontrolní omezení (C##INVI.MATCH_CHECK_TEAMS) porušeno
+
+
+Error starting at line : 21 in command -
+INSERT INTO "Match" (TEAM1, TEAM2, PLAYED_AT, DESCRIPTION, RESULT) VALUES (4, 4, TO_DATE('3/12/2021', 'mm/dd/yyyy'), 'Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus.', 'HELLO')
+Error report -
+ORA-02290: kontrolní omezení (C##INVI.MATCH_CHECK_RESULT_VALUE) porušeno
+
+
+Error starting at line : 24 in command -
+INSERT INTO "Team" (NAME, WINS, LOSSES, RATING) VALUES ('Bitwolf', -1, 27, 0.2)
+Error report -
+ORA-02290: kontrolní omezení (C##INVI.TEAM_CHECK_WINS) porušeno
+
+
+Error starting at line : 25 in command -
+INSERT INTO "Team" (NAME, WINS, LOSSES, RATING) VALUES ('Bitwolf', 94, -1, 0.2)
+Error report -
+ORA-02290: kontrolní omezení (C##INVI.TEAM_CHECK_LOSSES) porušeno
+
+
+Error starting at line : 28 in command -
+INSERT INTO "User" (FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, BIRTHDATE, ADMIN) VALUES ('Arabela', 'Lopes', 'alopes0@cyberchimps.com', 'NyOQLQ37OKlW', TO_DATE('5/14/2005', 'MM/DD/YYYY'), 0)
+Error report -
+ORA-20100: User must be over 18!
+ORA-06512: na "C##INVI.IS_ADULT", line 4
+ORA-06512: na "C##INVI.TRG_USER_OVER_18", line 2
+ORA-04088: chyba během provádění triggeru 'C##INVI.TRG_USER_OVER_18'
+
+
+Error starting at line : 31 in command -
+INSERT INTO "Bet" (START_DATE, END_DATE, DESCRIPTION, RATE, MATCH_ID) VALUES (TO_DATE('5/17/2019', 'MM/DD/YYYY'), TO_DATE('9/1/2020', 'MM/DD/YYYY'), 'Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.', 27.8, 1)
+Error report -
+ORA-20101: Bet must end 1 day before match play date
+ORA-06512: na "C##INVI.IS_BET_ENDING_DAY_BEFORE_MATCH", line 6
+ORA-06512: na "C##INVI.TRG_BET_ENDS_BEFORE_MATCH_PLAY_DATE", line 2
+ORA-04088: chyba během provádění triggeru 'C##INVI.TRG_BET_ENDS_BEFORE_MATCH_PLAY_DATE'
+
+
+Error starting at line : 32 in command -
+INSERT INTO "Bet" (START_DATE, END_DATE, DESCRIPTION, RATE, MATCH_ID) VALUES (TO_DATE('5/17/2019', 'MM/DD/YYYY'), TO_DATE('8/29/2020', 'MM/DD/YYYY'), 'Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.', 27.8, 1)
+Error report -
+ORA-20101: Bet must end 1 day before match play date
+ORA-06512: na "C##INVI.IS_BET_ENDING_DAY_BEFORE_MATCH", line 6
+ORA-06512: na "C##INVI.TRG_BET_ENDS_BEFORE_MATCH_PLAY_DATE", line 2
+ORA-04088: chyba během provádění triggeru 'C##INVI.TRG_BET_ENDS_BEFORE_MATCH_PLAY_DATE'
+

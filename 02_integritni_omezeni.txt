@@ -1,0 +1,26 @@
+A) Triviální
+
+Tabulka UserAcount
+Atribut AMOUNT nesmí být menší než 0.
+
+Tabulka UserBet
+Atribut BET_AMOUNT musí být kladné číslo.
+
+Tabulka Bet
+Atribut START_DATE <= END_DATE.
+Atribut RATE > 1.
+
+Tabulka Match
+Atribut TEAM1 <> TEAM2.
+Atribut RESULT se rovná UNKNOWN, WIN nebo LOSS
+
+Tabulka Team
+Atributy WINS a LOSSES jsou nezáporné.
+
+B) Netriviální
+
+Tabulka User
+Uživatel při registraci dosáhl věku 18 let.
+
+Tabulka Bet
+Koncové datum sázky musí být přesně jeden den před datumem konání zápasu.

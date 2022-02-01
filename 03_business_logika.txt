@@ -1,0 +1,11 @@
+Registrace sázkaře
+
+Název: registrace_sazkare
+Parametry: email, password, first_name, last_name, admin, birthdate, amount, type, description
+Popis: procedura vytvoří nového sázkaře a jeho nový účet, který bude nabit novou částkou. Bude kontrolováno datum narození.
+
+Vytvoření nového zápasu
+
+Název: novy_zapas
+Parametry: team1, team2, date, description, result, rate_win_team1, rate_win_team2
+Popis: vytvoření nového zápasu a 2 výchozích sázek (Výhra team 1, výhra team2) - automaticky se nastaví start na aktuální datum a konec na den před zápasam

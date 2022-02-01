@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="UTF-8" />
+        <title>DORDB projekt</title>
+
+        <style>        
+            body {
+                font-family: Calibri, sans-serif;
+                font-size: 100%;
+                line-height: 160%;
+				padding: 0;
+				margin: 0;
+            }
+			
+			.bg-primary {
+					background-color: #3498db;
+			}
+			
+			.bg-secondary {
+					background-color: lightblue;
+			}
+			
+			.bg-danger {
+				background-color: #e74c3c;
+			}
+			
+			.todo {
+				background-color: #f1c40f;
+				padding: 16px;
+				font-weight: bold;
+				font-size: 2rem;
+			}
+
+            .almost_done {
+                background-color: #2ecc71;
+                padding: 16px;
+                font-weight: bold;
+                font-size: 2rem;
+            }
+			
+			.text-center {
+				text-align: center;
+			}
+            
+            .okraj {
+                max-width: 999px;
+                margin: 0 auto;
+                box-shadow: 0 0 100px #888;
+            }
+			
+			.section {
+				padding: 16px;
+			}
+
+            .description {
+                background: #d4f2ff;
+                padding: 5px;
+                color: #666666;
+            }
+
+            .description ul {
+                margin: 0;
+            }
+
+            h1, h2, h3 {
+                background-color: #3498db;
+                padding: 5px;
+                padding-left: 1em;
+				color: white;
+				margin: 0;
+            }
+            h1 {
+                text-align: center;
+				padding: 16px;
+            }
+			
+			h2 {
+				padding: 8px;
+			}
+
+            h2.done {
+                border-left: 30px solid #2ecc71;
+            }
+			
+			h3 {
+				padding: 4px;
+				margin: 10px 10px 0 10px;
+			}
+			
+            a, a:active, a:visited {
+                color: #0031ec;
+            }
+            
+            a:hover {
+                color:#ec0000;
+            }
+            
+            .info {
+                background-color: yellow;
+                padding: 1em;
+            }
+			
+			em {
+			color: #2980b9;
+			font-weight: bold;
+			}
+        </style>
+    </head>
+    <body>
+        <div class="okraj">
+            <h1>Sázková kancelář - projekt DORDB</h1>
+			<div class="section bg-secondary text-center">
+				<strong>Autor:</strong> Kristýna Hnízdilová, Josef Ručka
+			</div>
+			
+			<div class="section text-center">
+             Na celém projektu jsme pracovali společně. 
+			</div>
+            <h2 class="done">1. E-R diagram</h2>
+            <div class="description">
+                Musí obsahovat minimálně 4 entity, lze použít model z vlastních předchozích
+                semestrálních prací apod. Doporučena jsou originální zadání (nikoliv různé knihovny,
+                databáze CD/DVD, autobazary, apod.)
+            </div>
+			<div class="section text-center">
+            <a href="01_ER_model.png"><img src="01_ER_model.png" alt="ER diagram" title="ER diagram" style="width: 100%" /></a>
+			</div>
+            <h2 class="done">2. Slovní popis dodatečných integritních omezení</h2>
+            <div class="description">
+                <ul>
+                    <li>např. že plat musí být kladné číslo; že množství pracovníku v místnosti nemůže
+                        překročit kapacitu místnosti apod. (nepočítáme I.O. jako „unikátní“ nebo „cizí klíč“
+                        nebo omezení velikosti položky u řetězců nebo čísel)</li>
+
+                    <li>
+                        vyžadováno alespoň jedno „triviální omezení“ (jako např. plat > 0) a jedno
+                        „netriviální“ omezení (vztahem k jiné tabulce, agregační funkce jako v příkladu
+                        s kapacitou apod.)
+                    </li>
+                </ul>
+            </div>
+			
+            <h3>2.1. Triviální integritiní omezení</h3>
+            <ul>
+                <li>Tabulka UserAccount
+                    <ul>
+                        <li>Atribut <em>AMOUNT</em> nesmí být menší než 0.</li>
+                    </ul>
+                </li>
+                <li>Tabulka UserBet
+                    <ul>
+                        <li>Atribut <em>BET_AMOUNT</em> musí být kladné číslo.</li>
+                    </ul>
+                </li>    
+                <li>Tabulka Bet
+                    <ul>
+                        <li>Atribut <em>START_DATE</em> <= <em>END_DATE</em>.</li>
+						<li>Atribut <em>RATE</em> > 1.</li>
+                    </ul>
+                </li>
+                <li>Tabulka Match
+                    <ul>
+                        <li>Atribut <em>TEAM1</em> <> <em>TEAM2</em></li>
+                    </ul>
+                </li>
+                <li>Tabulka Team
+                    <ul>
+                        <li>Atributy <em>WINS</em> a <em>LOSSES</em> jsou nezáporné.</li>
+                    </ul>
+                </li>
+            </ul>
+        <h3>2.1. Netriviální integritní omezení</h3>
+
+        <ul>
+            <li>Tabulka User
+                <ul>
+                    <li>Uživatel při registraci dosáhl věku 18 let.</li>
+                </ul>
+            </li>
+
+            <li>Tabulka Bet
+                <ul>
+                    <li>Koncové datum sázky musí být přesně jeden den před datumem konání zápasu.</li>
+                </ul>
+            </li>
+        </ul>
+
+    <h2 class="done">3. Slovní návrh API rozhraní „business logiky“</h2>
+    <div class="description">
+        Návrh API rozhraní „business logiky“ pro dva procesy, jako např. přijetí zaměstnance =
+        založení záznamu zaměstnance, svázání s nadřízeným, svázání se sdíleným služebním vozem
+        (vazba N:M), založení požadavku na koupi pracovních pomůcek (jeden notebook, jedna myš).
+        Procesy by měly být složitější, než jen takové, které vedou na jeden update či insert
+        v proceduře.
+    </div>
+
+    <h3>Registrace sázkaře</h3>
+	<div class="section">
+		<div><strong>Název:</strong> registrace_sazkare</div>
+		<div><strong>Parametry:</strong> email, password, first_name, last_name, admin, birthdate, amount</div>
+		<div><strong>Popis:</strong> procedura vytvoří nového sázkaře a jeho nový účet, který bude nabit novou částkou. Bude kontrolováno datum narození.</div> 
+	</div>
+
+	<h3>Vytvoření nového zápasu</h3>
+	<div class="section">
+		<div><strong>Název:</strong> novy_zapas</div>
+		<div><strong>Parametry:</strong> team1, team2, date, description, result, rate_win_team1, rate_win_team2</div>
+		<div><strong>Popis:</strong> procedura vytvoří nový zápas a 2 výchozí sázky (Výhra team 1, výhra team2) - automaticky se nastaví start na aktuální datum a konec na den před zápasam</div>
+	</div>
+
+    <h2 class="done">4. Pět slovně formulovaných dotazů nad schématem</h2>
+    <div class="description">
+        Návrh pěti slovně formulovaných dotazů nad schématem – musí se jednat o různorodé
+        netriviální dotazy (navrhněte dotazy vedoucí na použití poddotazů, vnějších spojení,
+        množinových operací, agregací, atd.)
+    </div>
+    <ol>
+        <li>Všichni uživatelé se svým stavem konta seřazení sestupně.</li>
+        <li>Seřadit týmy podle počtu odehraných zápasů.</li>
+        <li>Počet týmů v jednotlivých kategoriích podle ratingu.</li>
+        <li>10 odehraných zápasů, které mají nejvíce uživatelských sázek.</li>
+        <li>Uživatelské sázky, seřazené podle velikost výhry.</li>
+    </ol>
+
+<h2 class="done">5. Skript, který vytvoří databázové schéma odpovídající E-R diagramu</h2>
+<div class="section"><strong>Skript:</strong> <a href="05_db_schema.sql">05_db_schema.sql</a></div>
+
+<h2 class="done">6. Skript, který vytvoří v databázovém schématu dodatečná integritní omezení</h2>
+<div class="description">
+    Netriviální omezení budou realizována pomocí triggerů, které budou volat uložené
+    procedury provádějící kontrolu; porušení I.O. způsobí vyhození vlastní vyjímky
+</div>
+<div class="section"><strong>Skript:</strong> <a href="06_integritni_omezeni_z_bodu_2.sql">06_integritni_omezeni_z_bodu_2.sql</a></div>
+
+<h2 class="done">7. Skript, který naplní tabulky testovacími daty</h2>
+<div class="description">
+    Skript, který naplní tabulky testovacími daty – tabulky by měly obsahovat řádově tisíce řádků
+    (pro generování testovacích dat můžete použít různé již hotové nástroje).
+</div>
+<div class="section"><strong>Skript:</strong> <a href="07_testovaci_data.sql">07_testovaci_data.sql</a></div>
+
+<h2 class="done">8. Skript, který provede postupně všechny navržené dotazy z bodu 4</h2>
+<div class="description">
+    Skript (včetně výstupu spool), který provede postupně všechny navržené dotazy (viz výše)
+
+    <ul>
+        <li>z výstupu bude patrný dotaz, jeho exekuční plán (použijte SET AUTOTRACE ON) a
+            výsledek</li>
+        <li>u dvou (dle úvahy) nejsložitějších dotazů se pokuste vymyslet ještě druhou verzi
+            dotazu (vracející tentýž výsledek), a porovnáním (podle cost) exekučních plánů
+            (budou opět součástí výstupu) posuďte, který dotaz byl efektivnější</li>
+    </ul>
+</div>
+<div class="section">
+
+	<div><strong>Skript dotazy z 4:</strong> <a href="08_dotazy_z_bodu_4.sql">08_dotazy_z_bodu_4.sql</a></div>
+	<div><strong>Skript dotazy z 4 výsledky:</strong> <a href="08_dotazy_z_bodu_4_vysledky.txt">08_dotazy_z_bodu_4_vysledky.txt</a></div>
+	<div><strong>Porovnání:</strong> <a href="08_porovnani.sql">08_porovnani.sql</a></div>
+    <div><strong>Porovnání výsledky:</strong> <a href="08_porovnani_vysledky.txt">08_porovnani_vysledky.txt</a></div>
+</div>
+
+<h2 class="done">9. Skript, který se pokusí porušit všechna dodatečná integritní omezení</h2>
+<div class="description">
+    Skript, který se pokusí porušit postupně všechna dodatečná integritní omezení + výstup spool
+    z provádění tohoto skriptu (budou vidět chyby při porušení I.O.)
+</div>
+<div class="section">
+	<div><strong>Skript:</strong> <a href="09_poruseni_omezeni.sql">09_poruseni_omezeni.sql</a></div>
+	<div><strong>Výstup:</strong> <a href="09_vystup.txt">09_vystup.txt</a></div>
+</div>
+
+<h2 class="done">10. Skript pro vytvoření balíku (package) a procedur „business logiky“</h2>
+<div class="description">
+    Skript pro vytvoření balíku (package) a procedur „business logiky“
+</div>
+<div class="section">
+	<div><strong>Skript:</strong> <a href="10_balik_a_procedury.sql">10_balik_a_procedury.sql</a></div>
+</div>
+
+<h2 class="done">11. Ověření procedur „business logiky“</h2>
+<div class="description">
+    Testovací skript (včetně výstupu spool obdrženého po spuštění) pro obě procedury, včetně
+    souvisejících dotazů, které ověří, že každá procedura provedla to co měla
+</div>
+<div class="section">
+	<div><strong>Skript:</strong> <a href="11_testovaci_skript_procedur.sql">11_testovaci_skript_procedur.sql</a></div>
+	<div><strong>Výstupy:</strong> <a href="11_vystup.txt">11_vystup.txt</a></div>
+</div>
+
+<h2 class="done">12. Skript, který doplní do zvolené tabulky schématu automaticky dopočítávaný sloupec</h2>
+<div class="description">
+    Skript, který doplní do zvolené tabulky schématu sloupec, který bude obsahovat odvozené
+    hodnoty (průměrný plat zaměstnance v rámci oddělní apod.) – tyto hodnoty budou
+    automaticky aktualizovány pomocí triggerů
+</div>
+<div class="section">
+	<strong>Skript:</strong> <a href="12_odvozene_hodnoty.sql">12_odvozene_hodnoty.sql</a>
+</div>
+
+<h2 class="done">13. Navrhněte fakta a dimenze (E-R diagram) pro datový sklad</h2>
+<div class="description">
+    Navrhněte fakta a dimenze (E-R diagram) pro datový sklad vycházející z vaší databáze.
+    Přidejte i časovou dimenzi.
+</div>
+<div class="section text-center">
+    <a href="13_datovy_sklad_ER_model.png"><img src="13_datovy_sklad_ER_model.png" alt="Datový sklad ER diagram" title="Datový sklad ER diagram" style="width: 100%" /></a>
+</div>
+
+<h2 class="done">14. Skript, který vytvoří databázové schéma odpovídající E-R diagramu datového skladu</h2>
+<div class="section">
+	<div><strong>Skript:</strong> <a href="14_datovy_sklad.sql">14_datovy_sklad.sql</a></div>
+</div>
+
+<h2 class="done">15. Skript pro jednoduchý ETL proces dat z vaši produkční databáze do navrženého datového
+    skladu.</h2>
+<div class="section">
+    <div><strong>Skript:</strong> <a href="15_etl_proces.sql">15_etl_proces.sql</a></div>
+</div>
+
+<h2 class="done">16. Návrh dvou slovně formulovaných analytických dotazů nad datovým skladem, které povedou
+    na agregaci faktu přes několik dimenzí za určité časové období.</h2>
+<div class="section">
+    <ul>
+        <li>Dotaz, který zobrazí průměrnou vsazenou částku za rok 2020 a porovnání s průměrnou vsazenou částkou za rok 2021</li>
+        <li>Dotaz, který zobrazí uživatele podle celkově vsazené částky a počtu sázek na zápasy odehrané v roce 2020</li>
+    </ul>
+</div>
+
+<h2 class="done">17. Skript (včetně výstupu spool), který provede postupně všechny navržené analytické dotazy
+    skladu.</h2>
+<div class="section">
+    <div><strong>Skript:</strong> <a href="17_analyticke_dotazy.sql">17_analyticke_dotazy.sql</a></div>
+    <div><strong>Výstupy:</strong> <a href="17_analyticke_dotazy_vysledky.txt">17_analyticke_dotazy_vysledky.txt</a></div>
+</div>
+
+<h2 class="bg-danger">Skript pro vyčištění databáze</h2>
+<div class="section">
+	<strong>Skript:</strong> <a href="18_drop.sql">18_drop.sql</a>
+</div>
+</div>
+</body>
+</html>
