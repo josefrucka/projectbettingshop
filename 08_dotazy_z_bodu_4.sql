@@ -44,7 +44,7 @@ from "Team"
 group by
 (case when RATING >= 0 and RATING <= 0.5    then '0 - 0.5'
            when RATING > 0.5 and RATING <= 1.0   then '0.5+ - 1.0'
-           when RATING > 1.0 and RATING <= 5  then '1.0+ - 5.0'
+           when RATING > 1.0 and RATING <= 5  then '1.0+ - 4.0'
            else 'over 5'
 end) ORDER BY RATING_AVERAGE ASC;
 prompt
