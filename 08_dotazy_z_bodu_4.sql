@@ -35,7 +35,7 @@ prompt ================================
 select
 (case when RATING >= 0 and RATING <= 0.5    then '0 - 0.5'
            when RATING > 0.5 and RATING <= 1.0   then '0.5+ - 1.0'
-           when RATING > 1.0 and RATING <= 5  then '1.0+ - 5.0'
+           when RATING > 1.0 and RATING <= 5  then '1.0+ - 4.0'
            else 'over 5'
 end) As RATING_RANGE,
 count(*) as TEAM_TOTAL_COUNT,
